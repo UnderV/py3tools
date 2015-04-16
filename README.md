@@ -6,7 +6,7 @@ Some handy system tools.
 #!/usr/bin/python3
 from py3tools.shell_exec import shell_exec
 
-(output, error_message, return_code) = bash_exec('ls -l')
+(output, error_message, return_code) = shell_exec('ls -l')
 ```
 Returns 3 variables:
 output - contains command output
