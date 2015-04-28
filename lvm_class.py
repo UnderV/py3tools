@@ -53,7 +53,7 @@ class LvmClass():
                 return True
         return False
 
-    def lv_exists(self, vg_name, lv_name):
+    def lv_exists(self, vg_name, lv_name): # Check if Logical Volume exists
         for item in self.lv_dict:
             if item["Path"] == '/dev/'+vg_name+'/'+lv_name:
                 return True
@@ -65,13 +65,13 @@ class LvmClass():
                 return item["VFree"]
         return False
 
-    def get_lv_attr(self, vg_name, lv_name):
+    def get_lv_attr(self, vg_name, lv_name): # Get Logical Volume's attributes
         for item in self.lv_dict:
             if item["Path"] == '/dev/'+vg_name+'/'+lv_name:
                 return item["Attr"]
         return False
 
-    def get_vg_attr(self, vg_name):
+    def get_vg_attr(self, vg_name): # Get Volume Group's attributes
         for item in self.vg_dict:
             if item["VG"] == vg_name:
                 return item["Attr"]
