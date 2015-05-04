@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-# This tool requires some HP packages onserver.
+# This tool requires some HP packages on server.
 # Use HP repository - http://downloads.linux.hp.com/downloads/ManagementComponentPack/ubuntu
 # Install 3 packages - hpacucli hp-health hponcfg
 
@@ -29,8 +29,6 @@ def hp_monitoring(param):
     (output, error, return_code) = shell_exec(shell_command)
     if return_code != 0: # If command fails return all shell outputs and errors
         return (output, error, return_code)
-
-
 
     t_values_list = []
 
