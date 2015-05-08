@@ -16,7 +16,7 @@ def hp_monitoring(param):
     if param == 'fan':
         shell_command = 'hplog -f'
         # Define columns by teir size
-        t_keys = ['id','type','location','status','redundant','speed-status','speed']
+        t_keys = ['id','type','location','status','redundant','fan','speed']
         t_keys_size = [4,13,16,11,8,9,5] # Define column size
 
     if param == 'power':
@@ -50,4 +50,5 @@ def hp_monitoring(param):
             temp_line = temp_line[t_keys_size[i]:] # Each iteration line is shortened by used characters
         t_values_list.append(t_dict) # Array of dictionaries
     return (t_values_list, '', 0)
+
 

@@ -20,7 +20,7 @@ def ping(ip_address, ping_count, return_type='standard'):
             for line in packets:
                 for key in packets_key_list:
                     if key in line:
-                        packets_value_list.append(line.replace(key, "").strip());
+                        packets_value_list.append(line.replace(key, "").strip())
             packets_dict = dict(zip(packets_key_list, packets_value_list))
 
             # Sample of line: "rtt min/avg/max/mdev = 1.868/1.868/1.868/0.000 ms"
@@ -37,5 +37,37 @@ def ping(ip_address, ping_count, return_type='standard'):
 
             # outpput_dict sample: {'packets transmitted': '1', 'received': '1', 'packet loss': '0%', 'time': '0ms', 'min': '1.868', 'avg': '1.868', 'max': '1.868', 'mdev': '0.000'}
             return(output_dict, error, return_code)
+        if return_code == 1:
+            # Ping return return code '1' in two different situations
+
+            # Situation 1: Subnet is OK, but host is unreachable
+            # Sample output: "2 packets transmitted, 0 received, +2 errors, 100% packet loss, time 1007ms"
+            packets_key_list5 = ['packets transmitted', 'received', 'errors', 'packet loss', 'time']
+
+            # Situation 2: Cannot reach even subnet
+            # Sample output: "2 packets transmitted, 0 received, 100% packet loss, time 1006ms"
+            packets_key_list4 = ['packets transmitted', 'received', 'packet loss', 'time']
+
+            # Usefull output could be on one of two last lines (check by existing of ',')
+            if ',' in output.split('\n')[-2]:
+                packets = output.split('\n')[-2].split(',')
+            else:
+                packets = output.split('\n')[-1].split(',')
+
+            packets_value_list = []
+
+            # Check what situation of output we have - 5 or 4 items
+            if len(packets) == 5:
+                packets_key_list = packets_key_list5
+            else:
+                packets_key_list = packets_key_list4
+
+            for line in packets:
+                for key in packets_key_list:
+                    if key in line:
+                        packets_value_list.append(line.replace(key, "").strip())
+            packets_dict = dict(zip(packets_key_list, packets_value_list))
+
+            return(packets_dict, error, return_code)
         else:
             return (output, error, return_code)
