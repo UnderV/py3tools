@@ -7,7 +7,7 @@ class LvmClass():
 
     def reload(self):
         # Getting data about Physical Volumes
-        (pv_output, pv_error, pv_return_code) = shell_exec("pvs --units b --nosuffix --separator ';' -o pv_all")
+        (pv_output, pv_error, pv_return_code) = shell_exec("pvs --units b --nosuffix --separator ';' -o pv_all 2>/dev/null")
         if pv_return_code != 0:
             return pv_return_code
 
@@ -20,7 +20,7 @@ class LvmClass():
             self.pv_dict.append(dict(zip(pv_keys,line.strip().split(";")))) # Fill dictionary with key value
 
         # Getting data about Volume Groups
-        (vg_output, vg_error, vg_return_code) = shell_exec("vgs --units b --nosuffix --separator ';' -o vg_all")
+        (vg_output, vg_error, vg_return_code) = shell_exec("vgs --units b --nosuffix --separator ';' -o vg_all 2>/dev/null")
         if vg_return_code != 0:
             return vg_return_code
 
@@ -33,7 +33,7 @@ class LvmClass():
             self.vg_dict.append(dict(zip(vg_keys,line.strip().split(";")))) # Fill dictionary with key value
 
         # Getting data about Logical Volumes
-        (lv_output, lv_error, lv_return_code) = shell_exec("lvs --units b --nosuffix --separator ';' -o lv_all")
+        (lv_output, lv_error, lv_return_code) = shell_exec("lvs --units b --nosuffix --separator ';' -o lv_all 2>/dev/null")
         if lv_return_code != 0:
             return lv_return_code
 
