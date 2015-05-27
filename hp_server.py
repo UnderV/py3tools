@@ -6,7 +6,7 @@
 
 from py3tools.shell_exec import shell_exec
 
-def hp_info(param):
+def hp_server(param):
     if param == 'temperature':
         shell_command = 'hplog -t'
         # Define columns by teir size
