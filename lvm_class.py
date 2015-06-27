@@ -9,7 +9,7 @@ class LvmClass():
         # Getting data about Physical Volumes
         (pv_output, pv_error, pv_return_code) = shell_exec("pvs --units b --nosuffix --separator ';' -o pv_all 2>/dev/null")
         if pv_return_code != 0:
-            return pv_return_code
+            raise ValueError(pv_error, pv_return_code)
 
         pv_output_line_array = pv_output.split('\n') # Split output by 'newline'
         pv_keys = pv_output_line_array[0].strip().split(';') # First output line split by ';'
@@ -22,7 +22,7 @@ class LvmClass():
         # Getting data about Volume Groups
         (vg_output, vg_error, vg_return_code) = shell_exec("vgs --units b --nosuffix --separator ';' -o vg_all 2>/dev/null")
         if vg_return_code != 0:
-            return vg_return_code
+            raise ValueError(vg_error, vg_return_code)
 
         vg_output_line_array = vg_output.split('\n') # Split output by 'newline'
         vg_keys = vg_output_line_array[0].strip().split(';') # First output line split by ';'
@@ -35,7 +35,7 @@ class LvmClass():
         # Getting data about Logical Volumes
         (lv_output, lv_error, lv_return_code) = shell_exec("lvs --units b --nosuffix --separator ';' -o lv_all 2>/dev/null")
         if lv_return_code != 0:
-            return lv_return_code
+            raise ValueError(lv_error, lv_return_code)
 
         lv_output_line_array = lv_output.split('\n') # Split output by 'newline'
         lv_keys = lv_output_line_array[0].strip().split(';') # First output line split by ';'
