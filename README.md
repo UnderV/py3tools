@@ -1,7 +1,9 @@
 # py3tools
 ### License
-GNU General Public License Version 3  
-  
+GNU LESSER General Public License Version 3  
+Please commit You changes made for this project.
+Otherwise there is no limitation to use this software for private or commercial use.
+
 ### Description
 Some handy system tools.  
   
