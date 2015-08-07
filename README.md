@@ -1,7 +1,7 @@
 # py3tools
 ### License
 GNU LESSER General Public License Version 3  
-Please commit You changes made for this project.
+Please commit changes You made for this project.
 Otherwise there is no limitation to use this software for private or commercial use.
 
 ### Description
