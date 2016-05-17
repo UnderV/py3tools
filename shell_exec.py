@@ -2,7 +2,7 @@
 import subprocess
 
 
-def shell_exec(bash_command):
+def Shell_exec(bash_command):
     childProcess = subprocess.Popen(bash_command,
                                     shell=True,
                                     stdin=subprocess.PIPE,

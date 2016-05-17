@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from py3tools.shell_exec import shell_exec
+from py3tools.shell_exec import Shell_exec
 
 
 class Lvm():
@@ -8,7 +8,7 @@ class Lvm():
 
     def reload(self):
         # Getting data about Physical Volumes
-        (pv_output, pv_error, pv_return_code) = shell_exec("pvs"
+        (pv_output, pv_error, pv_return_code) = Shell_exec("pvs"
                                                            "--units b"
                                                            "--nosuffix"
                                                            "--separator ';'"
@@ -31,7 +31,7 @@ class Lvm():
             self.pv_dict.append(dict(zip(pv_keys, line.strip().split(";"))))
 
         # Getting data about Volume Groups
-        (vg_output, vg_error, vg_return_code) = shell_exec("vgs"
+        (vg_output, vg_error, vg_return_code) = Shell_exec("vgs"
                                                            "--units b"
                                                            "--nosuffix"
                                                            "--separator ';'"
@@ -53,7 +53,7 @@ class Lvm():
             self.vg_dict.append(dict(zip(vg_keys, line.strip().split(";"))))
 
         # Getting data about Logical Volumes
-        (lv_output, lv_error, lv_return_code) = shell_exec("lvs"
+        (lv_output, lv_error, lv_return_code) = Shell_exec("lvs"
                                                            "--units b"
                                                            "--nosuffix"
                                                            "--separator ';'"
@@ -149,7 +149,7 @@ class Lvm():
             if int(self.get_vg_free_space(vg_name)) > int(lv_size):
                 # Logical Volume should not exist
                 if not self.lv_exists(vg_name, lv_name):
-                    (output, error, return_code) = shell_exec("lvcreate -L " +
+                    (output, error, return_code) = Shell_exec("lvcreate -L " +
                                                               lv_size +
                                                               "B -n " +
                                                               lv_name +
@@ -175,7 +175,7 @@ class Lvm():
                 if self.lv_exists(vg_name, lv_name):
                     # Snapshot should not already exist
                     if not self.lv_exists(vg_name, snap_name):
-                        (output, error, return_code) = shell_exec("lvcreate"
+                        (output, error, return_code) = Shell_exec("lvcreate"
                                                                   "-L " +
                                                                   snap_size +
                                                                   "B -s -n " +
@@ -195,7 +195,7 @@ class Lvm():
         if self.is_snapshot(vg_name, lv_name):
             # Logical Volume should not be in use
             if not self.is_lv_in_use(vg_name, lv_name):
-                (output, error, return_code) = shell_exec("lvremove"
+                (output, error, return_code) = Shell_exec("lvremove"
                                                           "/dev/" +
                                                           vg_name +
                                                           "/" +
@@ -214,7 +214,7 @@ class Lvm():
             if not self.has_lv_snapshot(vg_name, lv_name):
                 # Logical Volume should not be in use
                 if not self.is_lv_in_use(vg_name, lv_name):
-                    (output, error, return_code) = shell_exec("lvremove"
+                    (output, error, return_code) = Shell_exec("lvremove"
                                                               "/dev/" +
                                                               vg_name +
                                                               "/" +
